@@ -1,0 +1,13 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.cyl.crowd</groupId>
+  <artifactId>cf01-admin-parent</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  <modules>
+  	<module>cf02-admin-webui</module>
+  	<module>cf03-admin-component</module>
+  	<module>cf-04-admin-entity</module>
+  	<module>cf04-admin-entity</module>
+  </modules>
+</project>
