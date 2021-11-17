@@ -7,4 +7,11 @@
   </parent>
   <artifactId>cf02-admin-webui</artifactId>
   <packaging>war</packaging>
+  <dependencies>
+  	<dependency>
+  		<groupId>com.cyl.crowd</groupId>
+  		<artifactId>cf03-admin-component</artifactId>
+  		<version>0.0.1-SNAPSHOT</version>
+  	</dependency>
+  </dependencies>
 </project>
