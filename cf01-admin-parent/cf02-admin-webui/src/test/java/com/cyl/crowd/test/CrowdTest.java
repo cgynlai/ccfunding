@@ -6,11 +6,15 @@ import javax.sql.DataSource;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.slf4j.LoggerFactory;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.cyl.crowd.entity.Admin;
 import com.cyl.crowd.mapper.AdminMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -23,6 +27,18 @@ public class CrowdTest {
 	
 	@Autowired
 	private AdminMapper adminMapper;
+	
+	@Test
+	public void testLog() {
+		Logger logger = LoggerFactory.getLogger(CrowdTest.class);
+		logger.debug("Hello from debug level !!");
+		logger.info("hello fr info level !!");
+		logger.error("helloo fr error level");
+		logger.debug("Hello from debug level !!");
+		logger.info("hello fr info level !!");
+		logger.error("helloo fr error level");
+	}
+	
 	
 	@Test
 	public void testInserAdmin() {
