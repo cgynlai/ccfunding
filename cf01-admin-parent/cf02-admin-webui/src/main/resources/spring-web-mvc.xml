@@ -7,7 +7,7 @@
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 
-	<context:component-scan base-package="com.welisit.crowd.mvc"></context:component-scan>
+	<context:component-scan base-package="com.cyl.crowd.mvc"></context:component-scan>
 	<!-- 打开注解 -->
 	<mvc:annotation-driven></mvc:annotation-driven>
 	
@@ -21,7 +21,7 @@
 		<property name="exceptionMappings">
 			<props>
 				<prop key="java.lang.Exception">system-error</prop>
-				<prop key="com.welisit.crowd.exception.AccessForbiddenException">admin-login</prop>
+				<prop key="com.cyl.crowd.exception.AccessForbiddenException">admin-login</prop>
 			</props>
 		</property>
 	</bean>
@@ -35,7 +35,7 @@
 	 		<mvc:exclude-mapping path="/admin/to/logout.html"/>
 	 	
 	 		配置拦截器类
-	 		<bean class="com.welisit.crowd.mvc.interceptor.LoginInterceptor"></bean>
+	 		<bean class="com.cyl.crowd.mvc.interceptor.LoginInterceptor"></bean>
 	 	</mvc:interceptor>
 	 </mvc:interceptors> 
 	 -->

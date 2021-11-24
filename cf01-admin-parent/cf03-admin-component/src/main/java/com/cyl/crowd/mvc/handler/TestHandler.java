@@ -1,9 +1,10 @@
-package com.cyl.crowd.handler;
+package com.cyl.crowd.mvc.handler;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.cyl.crowd.entity.Admin;
@@ -16,8 +17,9 @@ public class TestHandler {
 	
 	
 	@RequestMapping("/test/ssm.html")
-	public String testSSM() {
+	public String testSSM(ModelMap modelMap) {
 		List<Admin> adminList = adminService.getAll();
+		modelMap.addAttribute("adminList", adminList);
 		return "target";
 	}
 }
