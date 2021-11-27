@@ -7,7 +7,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cyl.crowd.entity.Admin;
@@ -16,7 +18,8 @@ import com.cyl.crowd.service.api.AdminService;
 @Controller
 public class TestHandler {
 
-	@Autowired AdminService adminService;
+	@Autowired 
+	AdminService adminService;
 	
 	
 	@RequestMapping("/test/ssm.html")
@@ -28,14 +31,42 @@ public class TestHandler {
 	
 	@ResponseBody
 	@RequestMapping("/send/array.html")
-	public String testReceiveArray() {
+	public String testReceiveArray(@RequestParam("array[]") List<Integer> array) {
 		
 		Logger logger = LoggerFactory.getLogger(TestHandler.class);
 		
+		for(Integer element : array) {
+			logger.info("number : "  + element );
+		}
 		
 		return "target";
 	}
 	
 	
+	  
+	@ResponseBody	  
+	  @RequestMapping("/send/array2.json") public String
+	  testReceiveArray2(@RequestBody List<Integer> array) {
+		  Logger logger = LoggerFactory.getLogger(TestHandler.class);
+	  
+	  for(Integer element : array) { logger.info("number : " + element ); }
+	  
+	  return "target"; }
+	 
 	
-}
+	
+	/*
+	 * @RequestMapping("/send/array2.json") public String
+	 * testReceiveArray2(@RequestBody List<Integer> array) {
+	 * 
+	 * return "target"; }
+	 */
+	
+	
+	}
+	
+	
+	
+	
+	
+
