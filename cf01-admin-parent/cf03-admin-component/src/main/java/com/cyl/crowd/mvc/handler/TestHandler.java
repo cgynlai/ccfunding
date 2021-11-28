@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cyl.crowd.entity.Admin;
 import com.cyl.crowd.service.api.AdminService;
+import com.cyl.crowd.util.ResultEntity;
 
 @Controller
 public class TestHandler {
@@ -44,15 +45,29 @@ public class TestHandler {
 	
 	
 	  
-	@ResponseBody	  
-	  @RequestMapping("/send/array2.json") public String
-	  testReceiveArray2(@RequestBody List<Integer> array) {
+	/*
+	 * @ResponseBody
+	 * 
+	 * @RequestMapping("/send/array2.json") public String
+	 * testReceiveArray2(@RequestBody List<Integer> array) { Logger logger =
+	 * LoggerFactory.getLogger(TestHandler.class);
+	 * 
+	 * for(Integer element : array) { logger.info("number : " + element ); }
+	 * 
+	 * return "target"; }
+	 */
+	 
+	
+	  @ResponseBody	  
+	  @RequestMapping("/send/array2.json") 
+	  public ResultEntity<List> testReceiveArray2(@RequestBody List<Integer> array) {
 		  Logger logger = LoggerFactory.getLogger(TestHandler.class);
 	  
-	  for(Integer element : array) { logger.info("number : " + element ); }
-	  
-	  return "target"; }
 	 
+	  
+	  return ResultEntity.successWithData(array); 
+	  
+	  }
 	
 	
 	/*
