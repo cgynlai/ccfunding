@@ -12,6 +12,8 @@ import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.cyl.crowd.constant.CrowdConstant;
+
 
 
 public class CrowdUtil {
@@ -55,6 +57,41 @@ public class CrowdUtil {
 		&&
 		xRequestInformation.equals("XMLHttpRequest")
 		);
+	}
+	
+	public static String md5(String source) {
+		
+		if(source == null || source.length() == 0) {
+			throw new RuntimeException(CrowdConstant.MESSAGE_STRING_INVALIDATE);
+		}
+		
+		String algorithm = "md5";
+		
+		try {
+			// use m5 to encode
+			MessageDigest messageDigest = MessageDigest.getInstance(algorithm);
+			// convert source string to byte array
+			byte[] input = source.getBytes();
+			// encoding
+			byte[] output = messageDigest.digest(input);
+			// 创建BigInteger对象存放加密后的字节数组
+			int signum = 1;
+			BigInteger bigInteger = new BigInteger(signum, output);
+			
+			// 按照16进制将bigInteger转换为字符串
+			int radix = 16;
+			String encoded = bigInteger.toString(radix).toUpperCase();
+			
+			return encoded;
+			
+			
+			
+		} catch (NoSuchAlgorithmException e) {
+			
+			e.printStackTrace();
+		}
+		
+		return null;
 	}
 	
 	
