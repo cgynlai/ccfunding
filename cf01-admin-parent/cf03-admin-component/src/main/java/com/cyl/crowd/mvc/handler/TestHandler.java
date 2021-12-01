@@ -35,7 +35,8 @@ public class TestHandler {
 		List<Admin> adminList = adminService.getAll();
 		modelMap.addAttribute("adminList", adminList);
 		
-	//	System.out.println(10/0);
+  	System.out.println(10/0);
+		
 		
 		return "target";
 	}
@@ -74,6 +75,9 @@ public class TestHandler {
 		//  Logger logger = LoggerFactory.getLogger(TestHandler.class);
 		  boolean judgeResult = CrowdUtil.judgeRequestType(request);
 			logger.info("judge result : " + judgeResult);
+			
+			
+		  //  System.out.println(10/0);
 	 
 	  
 	  return ResultEntity.successWithData(array); 

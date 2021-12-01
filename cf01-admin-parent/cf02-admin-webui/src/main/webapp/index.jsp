@@ -42,7 +42,7 @@
 				"contentType": "application/json;charset=utf-8",  //inform server requestbody is json type.
 				"dataType": "text",
 				"success": function(response){
-					alert("success");
+					alert(response);
 					console.log(response);
 				},
 				"error": function(response){

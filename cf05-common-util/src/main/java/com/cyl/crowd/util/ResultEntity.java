@@ -9,31 +9,17 @@ public class ResultEntity<T> {
 	public static final String SUCCESS = "SUCCESS";
 	public static final String FAILED = "FAILED";
 
-	/**
-	 * è¿”å›žæ“�ä½œç»“æžœä¸ºæˆ�åŠŸï¼Œä¸�å¸¦æ•°æ�®
-	 * 
-	 * @return
-	 */
+	
 	public static <E> ResultEntity<E> successWithoutData() {
 		return new ResultEntity<E>(SUCCESS, null, null);
 	}
 
-	/**
-	 * è¿”å›žæ“�ä½œç»“æžœä¸ºæˆ�åŠŸï¼Œæ�ºå¸¦æ•°æ�®
-	 * 
-	 * @param data
-	 * @return
-	 */
+	
 	public static <E> ResultEntity<E> successWithData(E data) {
 		return new ResultEntity<E>(SUCCESS, null, data);
 	}
 
-	/**
-	 * è¿”å›žæ“�ä½œç»“æžœä¸ºå¤±è´¥ï¼Œä¸�å¸¦æ•°æ�®
-	 * 
-	 * @param message
-	 * @return
-	 */
+	
 	public static <E> ResultEntity<E> failed(String message) {
 		return new ResultEntity<E>(FAILED, message, null);
 	}
@@ -52,11 +38,10 @@ public class ResultEntity<T> {
 		this.data = data;
 	}
 
-	@Override
-	public String toString() {
-		return "AjaxResultEntity [result=" + result + ", message=" + message
-				+ ", data=" + data + "]";
-	}
+	
+	  @Override public String toString() { return "AjaxResultEntity [result=" +
+	  result + ", message=" + message + ", data=" + data + "]"; }
+	 
 
 	public String getResult() {
 		return result;
