@@ -22,7 +22,7 @@
 	<bean id="simpleMappingExceptionResolver" class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
 		<property name="exceptionMappings">
 			<props>
-				<prop key="java.lang.Exception">system-error</prop>
+				<!-- <prop key="java.lang.Exception">system-error</prop> -->
 				<prop key="com.cyl.crowd.exception.AccessForbiddenException">admin-login</prop>
 			</props>
 		</property>
