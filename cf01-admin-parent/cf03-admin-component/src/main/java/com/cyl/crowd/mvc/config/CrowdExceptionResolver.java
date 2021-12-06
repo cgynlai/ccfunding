@@ -10,14 +10,14 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.google.gson.Gson;
 import com.cyl.crowd.constant.CrowdConstant;
-//import com.cyl.crowd.exception.AccessForbiddenException;
+import com.cyl.crowd.exception.AccessForbiddenException;
 //import com.cyl.crowd.exception.LoginAcctAlreadyInUseException;
 //import com.cyl.crowd.exception.LoginAcctAlreadyInUseForUpdateException;
 import com.cyl.crowd.exception.LoginFailedException;
 import com.cyl.crowd.util.CrowdUtil;
 import com.cyl.crowd.util.ResultEntity;
+import com.google.gson.Gson;
 
 /**
  * 公共异常处理类
@@ -68,13 +68,14 @@ public class CrowdExceptionResolver {
 	 * @return
 	 * @throws IOException
 	 */
-	/*
-	 * @ExceptionHandler(value = { AccessForbiddenException.class }) public
-	 * ModelAndView resolveAccessForbiddenException(Exception exception,
-	 * HttpServletRequest request, HttpServletResponse response) throws IOException
-	 * { String viewName = "admin-login"; return commonResolveException(exception,
-	 * request, response, viewName); }
-	 */
+	
+	  @ExceptionHandler(value = { AccessForbiddenException.class }) 
+	  public ModelAndView resolveAccessForbiddenException(Exception exception,
+	  HttpServletRequest request, HttpServletResponse response) throws IOException { 
+           //			 String viewName = "admin-login"; 
+		  String viewName = "system-error";
+		  return commonResolveException(exception, request, response, viewName); }
+	 
 	
 	/**
 	 * 解析登录失败异常

@@ -19,6 +19,15 @@ public class AdminHandler {
 	@Autowired
 	private AdminService adminService;
 	
+	@RequestMapping("/admin/do/logout.html")
+	public String doLogout(HttpSession session) {
+		
+		//
+		session.invalidate();
+		
+		return "redirect:/admin/to/login/page.html";
+	}
+	
 	
 	@RequestMapping("/admin/do/login.html")
 	public String doLogin(
@@ -33,7 +42,8 @@ public class AdminHandler {
 		// 保存用户对象到session中
 		session.setAttribute(CrowdConstant.ATTR_NAME_LOGIN_ADMIN, admin);
 		
-		return "admin-page";
+		// return "admin-page";
+		return "redirect:/admin/to/main/page.html";
 	}
 	
 	@RequestMapping("/admin/get/page.html")

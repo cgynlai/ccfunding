@@ -96,7 +96,7 @@
       where 
         login_acct like concat("%", #{keyword}, "%") or 
         user_name like concat("%", #{keyword}, "%") or
-        email like concat("%", #{keyword}, "%"")
+        email like concat("%", #{keyword}, "%")
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from t_admin

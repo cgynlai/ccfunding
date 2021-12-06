@@ -62,7 +62,8 @@ public class CrowdUtil {
 	public static String md5(String source) {
 		
 		if(source == null || source.length() == 0) {
-			throw new RuntimeException(CrowdConstant.MESSAGE_STRING_INVALIDATE);
+			 throw new RuntimeException(CrowdConstant.MESSAGE_STRING_INVALIDATE); 
+			
 		}
 		
 		String algorithm = "md5";
