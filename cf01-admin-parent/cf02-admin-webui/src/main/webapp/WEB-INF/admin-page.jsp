@@ -4,6 +4,45 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <%@include file="/WEB-INF/include-head.jsp"%>
+<link rel="stylesheet" href="css/pagination.css" />
+<script type="text/javascript" src="jquery/jquery.pagination.js"></script>
+<script>
+
+ $(function() {
+	initPagination(); 
+ }
+);
+
+ function initPagination() {
+	 var totalRecord = ${requestScope.pageInfo.total};
+	 
+     //声明Pagination设置属性的JSON对象
+     var properties = {
+         num_edge_entries: 3,                                //边缘页数
+         num_display_entries: 5,                             //主体页数
+         callback: pageSelectCallback,                       //点击各种翻页按扭时触发的回调函数（执行翻页操作）
+         current_page: ${requestScope.pageInfo.pageNum-1},   //当前页码
+         prev_text: "上一页",                                 //在对应上一页操作的按钮上的文本
+         next_text: "下一页",                                 //在对应下一页操作的按钮上的文本
+         items_per_page: ${requestScope.pageInfo.pageSize}   //每页显示的数量
+     };
+	 
+	 $("#Pagination").pagination(totalRecord, properties);
+	 
+	    function pageSelectCallback(pageIndex, jQuery){
+	        // pageIndex是当前页码的索引，因此比pageNum小1
+	        var pageNum = pageIndex+1;
+
+	        // 执行页面跳转
+	        window.location.href = "admin/get/page.html?pageNum=" + pageNum + "&keyword=${param.keyword}";
+
+	        // 取消当前超链接的默认行为
+	        return false;
+	    }
+
+ }
+
+</script>
 <body>
 
 	<%@include file="/WEB-INF/include-nav.jsp"%>
@@ -86,73 +125,11 @@
 
 								</tbody>
 								<tfoot>
-									<tr>
-										<td colspan="6" align="center">
-											<nav aria-label="Page navigation">
-												<ul class="pagination">
-
-													<!-- 判断是否为第一页 -->
-													<c:if test="${pageInfo.isFirstPage }">
-														<li class="disabled"><span aria-hidden="true">&laquo;</span></li>
-													</c:if>
-													<c:if test="${!pageInfo.isFirstPage }">
-														<!-- 首页 -->
-														<li><a
-															href="admin/get/page.html?pageNum=${pageInfo.prePage }&keyword=${param.keyword}"
-															aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
-														</a></li>
-														<c:if
-															test="${pageInfo.firstPage != 1 && pageInfo.firstPage != 2}">
-															<li><a
-																href="admin/get/page.html?pageNum=1&keyword=${param.keyword}">1</a></li>
-															<li><span>...</span></li>
-														</c:if>
-														<c:if test="${pageInfo.firstPage == 2}">
-															<li><a
-																href="admin/get/page.html?pageNum=1&keyword=${param.keyword}">1</a></li>
-														</c:if>
-													</c:if>
-
-
-													<!-- 循环导航页 -->
-													<c:forEach items="${pageInfo.navigatepageNums }" var="num">
-														<c:if test="${pageInfo.pageNum == num }">
-															<li class="active"><span>${num }<span
-																	class="sr-only">(current)</span></span></li>
-														</c:if>
-														<c:if test="${pageInfo.pageNum != num }">
-															<li><a
-																href="admin/get/page.html?pageNum=${num }&keyword=${param.keyword}">${num }</a></li>
-														</c:if>
-													</c:forEach>
-
-
-													<!-- 判断是否为最后一页 -->
-													<c:if test="${pageInfo.isLastPage }">
-														<li class="disabled"><span aria-hidden="true">&raquo;</span></li>
-													</c:if>
-													<c:if test="${!pageInfo.isLastPage }">
-														<!-- 末页 -->
-														<c:if
-															test="${pageInfo.lastPage != pageInfo.pages && pageInfo.lastPage != pageInfo.pages-1}">
-															<li><span>...</span></li>
-															<li><a
-																href="admin/get/page.html?pageNum=${pageInfo.pages }&keyword=${param.keyword}">${pageInfo.pages }</a></li>
-														</c:if>
-														<c:if test="${pageInfo.lastPage == pageInfo.pages-1}">
-															<li><a
-																href="admin/get/page.html?pageNum=${pageInfo.pages }&keyword=${param.keyword}">${pageInfo.pages }</a></li>
-														</c:if>
-														<li><a
-															href="admin/get/page.html?pageNum=${pageInfo.nextPage }&keyword=${param.keyword}"
-															aria-label="Next"> <span aria-hidden="true">&raquo;</span>
-														</a></li>
-													</c:if>
-												</ul>
-											</nav>
-										</td>
-									</tr>
-
+			                          <tr>
+			                             <td colspan="6" alogn="center">
+			                                 <div id="Pagination" class="pagination"> <!-- here shows the pages --></div>
+			                             </td>
+			                          </tr>
 								</tfoot>
 							</table>
 						</div>
