@@ -115,10 +115,15 @@
 													href="admin/to/edit/page.html?adminId=${admin.id }&pageNum=${pageInfo.pageNum }&keyword=${param.keyword}"
 													class="btn btn-primary btn-xs"> <i
 														class=" glyphicon glyphicon-pencil"></i>
+														
+														
 												</a> <a class="btn btn-danger btn-xs"
-													href="admin/remove/admin.html?adminId=${admin.id }&pageNum=${pageInfo.pageNum }&keyword=${param.keyword}">
+													href="admin/remove/${admin.id}/${requestScope.pageInfo.pageNum}/${param.keyword}.html" >
 														<i class=" glyphicon glyphicon-remove"></i>
-												</a></td>
+												</a>
+												
+												
+												</td>
 											</tr>
 										</c:forEach>
 									</c:if>

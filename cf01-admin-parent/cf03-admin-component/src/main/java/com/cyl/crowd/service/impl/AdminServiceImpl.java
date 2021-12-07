@@ -99,6 +99,12 @@ public class AdminServiceImpl implements AdminService {
 		// 3. encap result into PageInfo object 
 		return new PageInfo<>(list) ;
 	}
+
+	@Override
+	public void remove(Integer adminId) {
+		adminMapper.deleteByPrimaryKey(adminId);
+		
+	}
 	
 	
 

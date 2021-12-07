@@ -5,6 +5,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -18,6 +19,17 @@ public class AdminHandler {
 	
 	@Autowired
 	private AdminService adminService;
+	
+	@RequestMapping("/admin/remove/{adminId}/{pageNum}/{keyword}.html")
+	public String remove(@PathVariable("adminId") Integer adminId,
+		                 @PathVariable("pageNum") Integer pageNum,
+		                 @PathVariable("keyword") String keyword
+		                 ) {
+		adminService.remove(adminId);
+		
+		//go back to page and keep original search result page
+		return "redirect:/admin/get/page.html?pageNum=" + pageNum + "&keyword=" + keyword;
+	}
 	
 	@RequestMapping("/admin/do/logout.html")
 	public String doLogout(HttpSession session) {
