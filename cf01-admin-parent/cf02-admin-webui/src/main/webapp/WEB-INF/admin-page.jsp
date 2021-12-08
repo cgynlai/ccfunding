@@ -74,10 +74,13 @@
 							style="float: right; margin-left: 10px;">
 							<i class=" glyphicon glyphicon-remove"></i> 删除
 						</button>
-						<button class="btn btn-primary" style="float: right;"
+						
+						<!-- <button class="btn btn-primary" style="float: right;"
 							onclick="window.location.href='admin/to/add/page.html'">
 							<i class="glyphicon glyphicon-plus"></i> 新增
-						</button>
+						</button> -->
+						
+						<a style="float: right;" href="admin/to/add/page.html" class="btn btn-primary" ><i class="glyphicon glyphicon-plus"></i>新增</a>
 						<br>
 						<hr style="clear: both;">
 						<div class="table-responsive">
