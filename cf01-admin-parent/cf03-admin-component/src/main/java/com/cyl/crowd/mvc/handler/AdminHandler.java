@@ -20,6 +20,12 @@ public class AdminHandler {
 	@Autowired
 	private AdminService adminService;
 	
+	@RequestMapping("/admin/save.html")
+	public String save(Admin admin) {
+		adminService.saveAdmin(admin);
+		return null;
+	}
+	
 	@RequestMapping("/admin/remove/{adminId}/{pageNum}/{keyword}.html")
 	public String remove(@PathVariable("adminId") Integer adminId,
 		                 @PathVariable("pageNum") Integer pageNum,
