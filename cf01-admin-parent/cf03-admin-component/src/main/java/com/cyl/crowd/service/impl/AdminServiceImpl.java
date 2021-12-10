@@ -1,5 +1,7 @@
 package com.cyl.crowd.service.impl;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -28,6 +30,17 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public void saveAdmin(Admin admin) {
 
+		// 加密密码
+		String userPswd = admin.getUserPswd();
+		userPswd = CrowdUtil.md5(userPswd);   
+		admin.setUserPswd(userPswd);
+		
+		// 生成系统时间
+		Date date = new Date();
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String createTime = simpleDateFormat.format(date);
+		admin.setCreateTime(createTime);
+				
 		adminMapper.insert(admin);
 
 	}

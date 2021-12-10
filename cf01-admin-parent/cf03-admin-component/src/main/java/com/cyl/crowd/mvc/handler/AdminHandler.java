@@ -38,6 +38,7 @@ public class AdminHandler {
 		session.invalidate();
 		
 		return "redirect:/admin/to/login/page.html";
+		
 	}
 	
 	
@@ -54,8 +55,8 @@ public class AdminHandler {
 		// 保存用户对象到session中
 		session.setAttribute(CrowdConstant.ATTR_NAME_LOGIN_ADMIN, admin);
 		
-		// return "admin-page";
-		return "redirect:/admin/to/main/page.html";
+	 return "admin-main";
+		//return "redirect:/admin/to/main/page.html";
 	}
 	
 	@RequestMapping("/admin/get/page.html")
