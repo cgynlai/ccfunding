@@ -5,13 +5,17 @@ import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 
 import com.cyl.crowd.constant.CrowdConstant;
 import com.cyl.crowd.entity.Admin;
 import com.cyl.crowd.entity.AdminExample;
 import com.cyl.crowd.entity.AdminExample.Criteria;
+import com.cyl.crowd.exception.LoginAcctAlreadyInUseException;
 import com.cyl.crowd.exception.LoginFailedException;
 import com.cyl.crowd.mapper.AdminMapper;
 import com.cyl.crowd.service.api.AdminService;
@@ -26,6 +30,9 @@ public class AdminServiceImpl implements AdminService {
 	
 	@Autowired
 	private AdminMapper adminMapper;
+	
+	
+	private Logger logger = LoggerFactory.getLogger(AdminServiceImpl.class);
 
 	@Override
 	public void saveAdmin(Admin admin) {
@@ -41,7 +48,16 @@ public class AdminServiceImpl implements AdminService {
 		String createTime = simpleDateFormat.format(date);
 		admin.setCreateTime(createTime);
 				
-		adminMapper.insert(admin);
+		try {
+			adminMapper.insert(admin);
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+			logger.info("异常类名 = " + e.getClass().getName());
+			if(e instanceof DuplicateKeyException) {
+				throw new LoginAcctAlreadyInUseException(CrowdConstant.MESSAGE_LOGIN_ACCT_ALREADY_IN_USE);
+			}
+		}
 
 	}
 

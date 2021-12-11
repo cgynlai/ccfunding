@@ -23,7 +23,7 @@ public class AdminHandler {
 	@RequestMapping("/admin/save.html")
 	public String save(Admin admin) {
 		adminService.saveAdmin(admin);
-		return null;
+		return "redirect:/admin/get/page.html?pageNum=" + Integer.MAX_VALUE;
 	}
 	
 	@RequestMapping("/admin/remove/{adminId}/{pageNum}/{keyword}.html")

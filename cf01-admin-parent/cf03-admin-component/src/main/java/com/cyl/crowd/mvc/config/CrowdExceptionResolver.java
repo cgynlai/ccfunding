@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.cyl.crowd.constant.CrowdConstant;
 import com.cyl.crowd.exception.AccessForbiddenException;
+import com.cyl.crowd.exception.LoginAcctAlreadyInUseException;
 //import com.cyl.crowd.exception.LoginAcctAlreadyInUseException;
 //import com.cyl.crowd.exception.LoginAcctAlreadyInUseForUpdateException;
 import com.cyl.crowd.exception.LoginFailedException;
@@ -52,13 +53,16 @@ public class CrowdExceptionResolver {
 	 * @return
 	 * @throws IOException
 	 */
-	/*
-	 * @ExceptionHandler(value = { LoginAcctAlreadyInUseException.class }) public
-	 * ModelAndView resolveLoginAcctAlreadyInUseException(Exception exception,
-	 * HttpServletRequest request, HttpServletResponse response) throws IOException
-	 * { String viewName = "admin-add"; return commonResolveException(exception,
-	 * request, response, viewName); }
-	 */
+	
+	  @ExceptionHandler(value = { LoginAcctAlreadyInUseException.class }) 
+	  public ModelAndView resolveLoginAcctAlreadyInUseException(
+			  LoginAcctAlreadyInUseException exception,
+	          HttpServletRequest request, 
+	          HttpServletResponse response) throws IOException { 
+		  String viewName = "admin-add"; 
+		  return commonResolveException(exception, request, response, viewName); 
+	  }
+	 
 	
 	/**
 	 * 解析访问拒绝异常
