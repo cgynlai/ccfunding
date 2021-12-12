@@ -114,13 +114,15 @@
 													href="assign/to/assign/role/page.html?adminId=${admin.id }&pageNum=${pageInfo.pageNum }&keyword=${param.keyword}"
 													class="btn btn-success btn-xs"> <i
 														class=" glyphicon glyphicon-check"></i>
-												</a> <a
-													href="admin/to/edit/page.html?adminId=${admin.id }&pageNum=${pageInfo.pageNum }&keyword=${param.keyword}"
+												</a> 
+												<a
+													href="admin/to/edit/page.html?adminId=${admin.id }&pageNum=${requestScope.pageInfo.pageNum }&keyword=${param.keyword}"
 													class="btn btn-primary btn-xs"> <i
 														class=" glyphicon glyphicon-pencil"></i>
 														
 														
-												</a> <a class="btn btn-danger btn-xs"
+												</a> 
+												<a class="btn btn-danger btn-xs"
 													href="admin/remove/${admin.id}/${requestScope.pageInfo.pageNum}/${param.keyword}.html" >
 														<i class=" glyphicon glyphicon-remove"></i>
 												</a>

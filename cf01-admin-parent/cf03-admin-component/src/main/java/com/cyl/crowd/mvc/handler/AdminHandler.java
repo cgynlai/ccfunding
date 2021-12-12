@@ -20,6 +20,16 @@ public class AdminHandler {
 	@Autowired
 	private AdminService adminService;
 	
+	@RequestMapping("/admin/to/edit/page.html")
+	public String toEditPage(
+			@RequestParam("admindId") Integer adminId,
+			ModelMap modelMap
+			) {
+		
+		
+		return "admin-edit";
+	}
+	
 	@RequestMapping("/admin/save.html")
 	public String save(Admin admin) {
 		adminService.saveAdmin(admin);
@@ -61,8 +71,8 @@ public class AdminHandler {
 		// 保存用户对象到session中
 		session.setAttribute(CrowdConstant.ATTR_NAME_LOGIN_ADMIN, admin);
 		
-	 return "admin-main";
-		//return "redirect:/admin/to/main/page.html";
+	// return "admin-main";
+		return "redirect:/admin/to/main/page.html";
 	}
 	
 	@RequestMapping("/admin/get/page.html")
