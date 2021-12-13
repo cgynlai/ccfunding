@@ -18,5 +18,9 @@ public interface AdminService {
 
 	public void remove(Integer adminId);
 
+	public Admin getAdminById(Integer adminId);
+
+	public void update(Admin admin);
+
 	
 }

@@ -14,7 +14,7 @@ import com.cyl.crowd.constant.CrowdConstant;
 import com.cyl.crowd.exception.AccessForbiddenException;
 import com.cyl.crowd.exception.LoginAcctAlreadyInUseException;
 //import com.cyl.crowd.exception.LoginAcctAlreadyInUseException;
-//import com.cyl.crowd.exception.LoginAcctAlreadyInUseForUpdateException;
+import com.cyl.crowd.exception.LoginAcctAlreadyInUseForUpdateException;
 import com.cyl.crowd.exception.LoginFailedException;
 import com.cyl.crowd.util.CrowdUtil;
 import com.cyl.crowd.util.ResultEntity;
@@ -38,13 +38,16 @@ public class CrowdExceptionResolver {
 	 * @throws IOException
 	 */
 	//将一个异常类型和一个方法关联起来
-	/*
-	 * @ExceptionHandler(value = { LoginAcctAlreadyInUseForUpdateException.class })
-	 * public ModelAndView resolveLoginAcctAlreadyInUseForUpdateException(Exception
-	 * exception, HttpServletRequest request, HttpServletResponse response) throws
-	 * IOException { String viewName = "admin-edit"; return
-	 * commonResolveException(exception, request, response, viewName); }
-	 */
+	
+	  @ExceptionHandler(value = { LoginAcctAlreadyInUseForUpdateException.class })
+	  public ModelAndView resolveLoginAcctAlreadyInUseForUpdateException(Exception
+	  exception, HttpServletRequest request, HttpServletResponse response) throws
+	  IOException {
+		  String viewName = "system-error"; 
+		  return commonResolveException(exception, request, response, viewName); 
+		  
+	  }
+	 
 	/**
 	 * 解析登录名已存在 异常
 	 * @param exception
