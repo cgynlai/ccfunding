@@ -11,7 +11,9 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.cyl.crowd.entity.Admin;
+import com.cyl.crowd.entity.Role;
 import com.cyl.crowd.mapper.AdminMapper;
+import com.cyl.crowd.mapper.RoleMapper;
 import com.cyl.crowd.service.api.AdminService;
 
 import org.slf4j.Logger;
@@ -32,6 +34,16 @@ public class CrowdTest {
 	
 	@Autowired
 	private AdminService adminService;
+	
+	@Autowired
+	private RoleMapper roleMapper;
+	
+	@Test
+	public void testAddrole() {
+		for(int i=0; i<235; i++) {
+			roleMapper.insert(new Role(null, "role"+i));
+		}
+	}
 	
 	@Test
 	public void test() {
