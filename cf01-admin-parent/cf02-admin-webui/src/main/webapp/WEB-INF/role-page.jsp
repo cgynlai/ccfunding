@@ -6,6 +6,8 @@
 <!-- <link rel="stylesheet" href="ztree/zTreeStyle.css" />
 <script type="text/javascript" src="ztree/jquery.ztree.all-3.5.min.js"></script>
  -->
+<link rel="stylesheet" href="css/pagination.css" />
+<script type="text/javascript" src="jquery/jquery.pagination.js"></script>
 <script type="text/javascript" src="crowd/my-role.js"></script>
 <script type="text/javascript">
 	$(function() {
@@ -19,7 +21,7 @@
 		// 2.调用执行分页的函数，显示分页效果
 		generatePage();
 
-/* 		// 3.给查询按钮绑定单击响应函数
+		// 3.给查询按钮绑定单击响应函数
 		$("#searchBtn").click(function() {
 			// ①获取关键词数据赋值给对应的全局变量
 			window.keyword = $("#keywordInput").val();
@@ -29,10 +31,10 @@
 
 		// 4.点击新增按钮打开模态框
 		$("#showAddModalBtn").click(function() {
-			$("#addModal").modal("show");
+			$("#addRoleModal").modal("show");
 		});
 
-		// 5.给新增模态框中的保存按钮绑定单击响应函数
+/*		// 5.给新增模态框中的保存按钮绑定单击响应函数
 		$("#saveRoleBtn").click(function() {
 			// ①获取用户在文本框中输入的角色名称
 			// #addModal 表示找到整个模态框
@@ -328,7 +330,8 @@
 									</tr>
 								</thead>
 								<tbody id="rolePageBody">
-									<tr>
+								
+									<!-- <tr>
 										<td>1</td>
 										<td><input type="checkbox"></td>
 										<td>PM - 项目经理</td>
@@ -343,22 +346,13 @@
 												<i class=" glyphicon glyphicon-remove"></i>
 											</button>
 										</td>
-									</tr>
+									</tr> -->
 
 								</tbody>
-								<tfoot id="Pagination">
+								<tfoot>
 									<tr>
 										<td colspan="6" align="center">
-											<ul class="pagination">
-												<li class="disabled"><a href="#">上一页</a></li>
-												<li class="active"><a href="#">1 <span
-														class="sr-only">(current)</span></a></li>
-												<li><a href="#">2</a></li>
-												<li><a href="#">3</a></li>
-												<li><a href="#">4</a></li>
-												<li><a href="#">5</a></li>
-												<li><a href="#">下一页</a></li>
-											</ul>
+											<div id="Pagination" class="pagination"><!-- here shows the pagination bar --></div>
 										</td>
 									</tr>
 
@@ -368,7 +362,8 @@
 					</div>
 				</div>
 			</div>
-		<%-- 	<%@include file="/WEB-INF/modal-role-add.jsp"%>
+			<%@include file="/WEB-INF/modal-role-add.jsp"%>
+		<%-- 	
 			<%@include file="/WEB-INF/modal-role-edit.jsp"%>
 			<%@include file="/WEB-INF/modal-role-delete.jsp"%>
 			<%@include file="/WEB-INF/modal-role-assign-auth.jsp"%> --%>
