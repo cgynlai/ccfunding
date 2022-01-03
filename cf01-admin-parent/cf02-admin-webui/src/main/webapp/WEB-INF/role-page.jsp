@@ -34,13 +34,13 @@
 			$("#addRoleModal").modal("show");
 		});
 
-/*		// 5.给新增模态框中的保存按钮绑定单击响应函数
+		// 5.给新增模态框中的保存按钮绑定单击响应函数
 		$("#saveRoleBtn").click(function() {
 			// ①获取用户在文本框中输入的角色名称
 			// #addModal 表示找到整个模态框
 			// 空格表示在后代元素中继续查找
 			// [name=roleName]表示匹配name 属性等于roleName 的元素
-			var roleName = $.trim($("#addModal [name=roleName]").val());
+			var roleName = $.trim($("#addRoleModal [name=roleName]").val());
 			// ②发送Ajax 请求
 			$.ajax({
 				"url" : "role/save.json",
@@ -67,28 +67,30 @@
 				}
 			});
 			// 关闭模态框
-			$("#addModal").modal("hide");
+			$("#addRoleModal").modal("hide");
 			// 清理模态框
-			$("#addModal [name=roleName]").val("");
+			$("#addRoleModal [name=roleName]").val("");
 		});
-
+		
+	
 		// 6.给页面上的“铅笔”按钮绑定单击响应函数，目的是打开模态框
 		// 传统的事件绑定方式只能在第一个页面有效，翻页后失效了
 
 		// 使用jQuery 对象的on()函数可以解决上面问题
-		// ①首先找到所有“动态生成”的元素所附着的“静态”元素
-		// ②on()函数的第一个参数是事件类型
-		// ③on()函数的第二个参数是找到真正要绑定事件的元素的选择器
+		// ①首先找到所有“动态生成”的元素所附着的“静态”元素:  $("#rolePageBody")
+		// ②on()函数的第一个参数是事件类型 : "click"
+		// ③on()函数的第二个参数是找到真正要绑定事件的元素的选择器 : ".pencilBtn"
 		// ③on()函数的第三个参数是事件的响应函数
 		$("#rolePageBody").on("click", ".pencilBtn", function() {
 			// 打开模态框
 			$("#editModal").modal("show");
 			// 获取表格中当前行中的角色名称
-			var roleName = $(this).parent().prev().text();
+			var roleName = $(this).parent().prev().text();  //parent is <td> element, prev is previous <td>
 			// 获取当前角色的id
 			// 依据是：var pencilBtn = "<button id='"+roleId+"' ……这段代码中我们把roleId 设置到id 属性了
-			// 为了让执行更新的按钮能够获取到roleId 的值，把它放在全局变量上
-			window.roleId = $(this).attr("roleid");
+			// 为了让执行更新的按钮能够获取到roleId 的值，把它放在全局变量上 var roleId 改为 ：
+			//window.roleId = $(this).attr("roleid");
+			window.roleId = this.id;
 			// 使用roleName 的值设置模态框中的文本框
 			$("#editModal [name=roleName]").val(roleName);
 		});
@@ -97,6 +99,7 @@
 		$("#updateRoleBtn").click(function() {
 			// ①从文本框中获取新的角色名称
 			var roleName = $("#editModal [name=roleName]").val();
+			
 			// ②发送Ajax 请求执行更新
 			$.ajax({
 				"url" : "role/update.json",
@@ -126,7 +129,7 @@
 		});
 
 		// 执行删除
-		$("#deleteRoleBtn").click(function() {
+/*		$("#deleteRoleBtn").click(function() {
 
 			var requestBody = JSON.stringify(window.roleIdArray);
 
@@ -317,6 +320,7 @@
 							style="float: right;">
 							<i class="glyphicon glyphicon-plus"></i> 新增
 						</button>
+					
 						<br>
 						<hr style="clear: both;">
 						<div class="table-responsive">
@@ -363,8 +367,9 @@
 				</div>
 			</div>
 			<%@include file="/WEB-INF/modal-role-add.jsp"%>
-		<%-- 	
 			<%@include file="/WEB-INF/modal-role-edit.jsp"%>
+		<%-- 	
+			
 			<%@include file="/WEB-INF/modal-role-delete.jsp"%>
 			<%@include file="/WEB-INF/modal-role-assign-auth.jsp"%> --%>
 		</div>

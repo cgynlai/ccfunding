@@ -79,7 +79,7 @@ function getPageInfoRemote() {
       
       
       
-       // 铅笔按钮用于修改role信息。用id属性（也可以是其他属性）携带当前的角色的id，class添加一个pencilBtn，方便添加响应函数
+       
 	 
 	 
 }
@@ -112,6 +112,7 @@ function fillTableBody(pageInfo) {
 		    var checkBtn = "<button type='button' roleId='"
 				+ roleId
 				+ "' class='btn btn-success btn-xs checkBtn'><i class='glyphicon glyphicon-check'></i></button>";
+		    // 铅笔按钮用于修改role信息。用id属性（也可以是其他属性）携带当前的角色的id，class添加一个pencilBtn，方便添加响应函数
 		    var pencilBtn = "<button type='button' roleId='"
 				+ roleId
 				+ "' class='btn btn-primary btn-xs pencilBtn'><i class='glyphicon glyphicon-pencil'></i></button>";

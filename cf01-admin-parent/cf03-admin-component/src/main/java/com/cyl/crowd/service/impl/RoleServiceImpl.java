@@ -31,4 +31,10 @@ public PageInfo<Role> getPageInfo(Integer pageNum, Integer pageSize, String keyw
 	
 	
 }
+
+@Override
+public void saveRole(Role role) {
+
+   roleMapper.insert(role);
+}
 }
