@@ -18,6 +18,13 @@ public class RoleHandler {
 	private RoleService roleService;
 	
 	@ResponseBody
+	@RequestMapping("/role/update.json")
+	public ResultEntity<String> updateRole(Role role) {
+		roleService.updateRole(role);
+		return ResultEntity.successWithoutData();
+	}
+	
+	@ResponseBody
 	@RequestMapping("/role/save.json")
 	public ResultEntity<String> saveRole(Role role) {
 		

@@ -112,7 +112,8 @@
 				"success" : function(response) {
 					var result = response.result;
 					if (result == "SUCCESS") {
-						layer.msg("操作成功！");
+						layer.msg("操作成功！" + "name is  " + roleName);
+						
 						// 重新加载分页数据
 						generatePage();
 					}
