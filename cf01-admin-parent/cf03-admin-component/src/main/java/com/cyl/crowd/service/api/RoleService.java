@@ -1,5 +1,7 @@
 package com.cyl.crowd.service.api;
 
+import java.util.List;
+
 import com.cyl.crowd.entity.Role;
 import com.github.pagehelper.PageInfo;
 
@@ -10,5 +12,7 @@ public interface RoleService {
 	void saveRole(Role role);
 
 	void updateRole(Role role);
+	
+	void removeRole(List<Integer> roleIdList);
 	  
 }

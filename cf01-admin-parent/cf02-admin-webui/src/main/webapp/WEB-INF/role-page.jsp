@@ -15,7 +15,7 @@
 		window.pageNum = 1;
 		window.pageSize = 5;
 		window.keyword = "";
-		
+		//window.roleId;
 		
 		
 		// 2.调用执行分页的函数，显示分页效果
@@ -85,12 +85,13 @@
 			// 打开模态框
 			$("#editModal").modal("show");
 			// 获取表格中当前行中的角色名称
-			var roleName = $(this).parent().prev().text();  //parent is <td> element, prev is previous <td>
+			var roleName = $(this).parent().prev().text();  //parent is <tr> element, prev is previous <td>
 			// 获取当前角色的id
 			// 依据是：var pencilBtn = "<button id='"+roleId+"' ……这段代码中我们把roleId 设置到id 属性了
 			// 为了让执行更新的按钮能够获取到roleId 的值，把它放在全局变量上 var roleId 改为 ：
-			//window.roleId = $(this).attr("roleid");
+			//window.roleId = $(this).attr("roleId");
 			window.roleId = this.id;
+			console.log("id is : " + window.roleId);
 			// 使用roleName 的值设置模态框中的文本框
 			$("#editModal [name=roleName]").val(roleName);
 		});
@@ -128,17 +129,22 @@
 			// ③关闭模态框
 			$("#editModal").modal("hide");
 		});
+		
+	//	var roleArray = [{roleId:5, roleName:"aaa"}, {roleId:6, roleName:"vvv"}];
+	//	showConfirmModal(roleArray);
 
 		// 执行删除
-/*		$("#deleteRoleBtn").click(function() {
-
+		$("#removeRoleBtn").click(function() {
+			
+            //obtian role id array from global array and convert to json string
 			var requestBody = JSON.stringify(window.roleIdArray);
 
 			$.ajax({
-				'url' : 'role/delete.json',
+				'url' : 'role/remove/by/role/id/array.json',
 				'type' : 'post',
 				'data' : requestBody,
 				'contentType' : "application/json;charset=utf-8",
+				'dataType' : 'json',
 				"success" : function(response) {
 					var result = response.result;
 					if (result == "SUCCESS") {
@@ -155,28 +161,41 @@
 				}
 			});
 			// ③关闭模态框
-			$("#deleteModal").modal("hide");
+			$("#confirmModal").modal("hide");
 		});
+
 
 		// 单条删除绑定事件
 		$("#rolePageBody").on("click", ".removeBtn", function() {
 			// 获取表格中当前行中的角色名称
 			var roleName = $(this).parent().prev().text();
+			
+			//from other source
 			// 获取当前角色的id
 			// 依据是：var pencilBtn = "<button id='"+roleId+"' ……这段代码中我们把roleId 设置到id 属性了
 			// 为了让执行更新的按钮能够获取到roleId 的值，把它放在全局变量上
-			window.roleId = $(this).attr("roleid");
-
-			// 创建role对象
-			var roleArray = [ {
-				id : $(this).attr("roleid"),
-				name : roleName
-			} ];
+			//window.roleId = $(this).attr("roleid");
+            // 创建role对象
+			//var roleArray = [ {
+			//	id : $(this).attr("roleid"),
+			//	name : roleName
+			//  } ];
 			// 调用函数打开模态框
-			showDeleteRoleContent(roleArray);
+			// showDeleteRoleContent(roleArray);
+			
+			// 创建role对象
+			var roleArray = [{
+				roleId: this.id,
+				roleName: roleName
+			}];
+			
+			//open confirmation modal
+			showConfirmModal(roleArray);
+			
 
 		});
 
+/*
 		// 给总checkbox绑定单击响应
 		$("#summaryBox").click(function() {
 			// 获取当前多选框状态
@@ -336,22 +355,7 @@
 								</thead>
 								<tbody id="rolePageBody">
 								
-									<!-- <tr>
-										<td>1</td>
-										<td><input type="checkbox"></td>
-										<td>PM - 项目经理</td>
-										<td>
-											<button type="button" class="btn btn-success btn-xs">
-												<i class=" glyphicon glyphicon-check"></i>
-											</button>
-											<button type="button" class="btn btn-primary btn-xs">
-												<i class=" glyphicon glyphicon-pencil"></i>
-											</button>
-											<button type="button" class="btn btn-danger btn-xs">
-												<i class=" glyphicon glyphicon-remove"></i>
-											</button>
-										</td>
-									</tr> -->
+									
 
 								</tbody>
 								<tfoot>
@@ -369,6 +373,7 @@
 			</div>
 			<%@include file="/WEB-INF/modal-role-add.jsp"%>
 			<%@include file="/WEB-INF/modal-role-edit.jsp"%>
+			<%@include file="/WEB-INF/modal-role-confirm.jsp"%>
 		<%-- 	
 			
 			<%@include file="/WEB-INF/modal-role-delete.jsp"%>

@@ -1,3 +1,29 @@
+//
+function showConfirmModal(roleArray) {
+	
+	// show modal
+	$("#confirmModal").modal("show");
+	
+	//clear old modal content
+	$("#roleNameDiv").empty();
+	
+	// 1a. create global array to store role id from for-loop
+	window.roleIdArray = [];
+	
+	//iterate roleArray
+	for(var i=0; i<roleArray.length; i++) {
+		var role = roleArray[i];
+		var roleName = role.roleName;
+		$("#roleNameDiv").append(roleName + "<br />");
+		
+		//store id to global array
+		var roleId = role.roleId;
+		window.roleIdArray.push(roleId);
+	}
+	
+}
+
+
 // 执行分页，生成分页效果
 function generatePage() {
 	
@@ -113,12 +139,11 @@ function fillTableBody(pageInfo) {
 				+ roleId
 				+ "' class='btn btn-success btn-xs checkBtn'><i class='glyphicon glyphicon-check'></i></button>";
 		    // 铅笔按钮用于修改role信息。用id属性（也可以是其他属性）携带当前的角色的id，class添加一个pencilBtn，方便添加响应函数
-		    var pencilBtn = "<button type='button' roleId='"
+		    /*var pencilBtn = "<button type='button' roleId='"
 				+ roleId
-				+ "' class='btn btn-primary btn-xs pencilBtn'><i class='glyphicon glyphicon-pencil'></i></button>";
-		    var removeBtn = "<button type='button' roleId='"
-				+ roleId
-				+ "' class='btn btn-danger btn-xs removeBtn'><i class='glyphicon glyphicon-remove'></i></button>";
+				+ "' class='btn btn-primary btn-xs pencilBtn'><i class='glyphicon glyphicon-pencil'></i></button>";*/
+		   var pencilBtn = "<button type='button' id='" + roleId + "' class='btn btn-primary btn-xs pencilBtn'><i class='glyphicon glyphicon-pencil'></i></button>";
+		    var removeBtn = "<button id='" + roleId + "' type='button' class='btn btn-danger btn-xs removeBtn'><i class='glyphicon glyphicon-remove'></i></button>";
 		    
 		    var buttonTd = "<td>" + checkBtn + " " + pencilBtn + " " + removeBtn
 				+ "</td>";

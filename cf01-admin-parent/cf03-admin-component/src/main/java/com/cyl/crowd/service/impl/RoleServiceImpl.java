@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cyl.crowd.entity.Role;
+import com.cyl.crowd.entity.RoleExample;
+import com.cyl.crowd.entity.RoleExample.Criteria;
 import com.cyl.crowd.mapper.RoleMapper;
 import com.cyl.crowd.service.api.RoleService;
 import com.github.pagehelper.PageHelper;
@@ -42,5 +44,19 @@ public void saveRole(Role role) {
 public void updateRole(Role role) {
 	
 	roleMapper.updateByPrimaryKey(role);
+}
+
+@Override
+public void removeRole(List<Integer> roleIdList) {
+	
+	RoleExample example = new RoleExample();
+	
+	Criteria criteria = example.createCriteria();
+	
+	//delete from t_role where id in (5,8,12)
+	criteria.andIdIn(roleIdList);
+	
+	roleMapper.deleteByExample(example);
+	
 }
 }
