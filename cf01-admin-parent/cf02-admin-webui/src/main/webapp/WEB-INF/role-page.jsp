@@ -162,6 +162,10 @@
 			});
 			// ③关闭模态框
 			$("#confirmModal").modal("hide");
+			
+		/* 	if($("#summaryBox").prop("checked")) {
+				$("#summaryBox").prop("checked", false);
+			} */
 		});
 
 
@@ -195,29 +199,33 @@
 
 		});
 
-/*
+
 		// 给总checkbox绑定单击响应
 		$("#summaryBox").click(function() {
 			// 获取当前多选框状态
 			var currentStatus = this.checked;
 
 			// 用当前多选框状态设置其他多选框
-			$(".itemBox").prop("checked", currentStatus);
-		})
-
-		// 每次CheckBox点击都进行循环判断是否有全部选择
+			$(".itemBox").prop("checked", currentStatus);	
+		});
+		
+		// check or uncheck #summaryBox checkbox based on all checkbox checked status
 		$("#rolePageBody").on("click", ".itemBox", function() {
-			var checked = true;
-			var itemBoxArray = $(".itemBox");
-			for (var i = 0; i < itemBoxArray.length; i++) {
-				if (!itemBoxArray[i].checked) {// 只要有一个为false，那么总的checked就为false
-					checked = false;
-				}
-			}
-			$("#summaryBox").prop("checked", checked);
-		})
+			
+			//get number of checked itemBox
+			var checkedBoxCount = $(".itemBox:checked").length;
+			
+			//get total number of itemBox
+			var totalBoxCount = $(".itemBox").length;
+			
+			//get boolean result by comparing above two checkbox number
+			$("#summaryBox").prop("checked", checkedBoxCount == totalBoxCount);
+		});
 
-		// 批量删除绑定单机函数
+
+
+
+		// 12. 批量删除绑定单机函数
 		$("#batchRemoveBtn").click(function() {
 
 			// 创建数组对象存放选中的role对象
@@ -227,13 +235,14 @@
 			$(".itemBox:checked").each(function() {
 
 				// 使用this引用当前遍历得到的多选框
-				var roleId = $(this).attr("roleid");
-
+				//var roleId = $(this).attr("roleid");
+				//var roleName = $(this).parent().next().text();
+				var roleId = this.id;
 				var roleName = $(this).parent().next().text();
-
+				
 				roleArray.push({
-					"id" : roleId,
-					"name" : roleName
+					"roleId" : roleId,
+					"roleName" : roleName
 				});
 			})
 
@@ -244,9 +253,11 @@
 			}
 
 			// 调用函数打开模态框
-			showDeleteRoleContent(roleArray);
+			showConfirmModal(roleArray);
 		})
 
+		
+/*		
 		// 分配权限
 		$("#rolePageBody").on("click", ".checkBtn", function() {
 			// 打开模态框

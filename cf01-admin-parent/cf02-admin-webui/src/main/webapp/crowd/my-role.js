@@ -126,13 +126,14 @@ function fillTableBody(pageInfo) {
 	   }
 	   
 	    // 根据PageInfo填充表格tbody
-	    for(var i=0; i<pageInfo.list.length; i++) {
+ for(var i=0; i<pageInfo.list.length; i++) {
 		    var role = pageInfo.list[i];
 		    var roleId = role.id;
 		    var roleName = role.name;
 		    
 		    var numberTd = "<td>" + (i+1) + "</td>";
-		    var checkboxTd = "<td><input type='checkbox'></td>";
+		    var checkboxTd = "<td><input id='" + roleId + "' class='itemBox' type='checkbox'></td>";
+		   // var checkboxTd = "<td><input type='checkbox' id='"+roleId+"' class='itemBox'/></td>";
 		    var roleNameTd = "<td>" + roleName + "</td>"; 
 		    
 		    var checkBtn = "<button type='button' roleId='"
@@ -156,7 +157,15 @@ function fillTableBody(pageInfo) {
 	     
 	     // 进行生成分页页码导航条
 	     generateNavigator(pageInfo);  
-	   
+	     
+	     //get number of checked itemBox
+			var checkedBoxCount = $(".itemBox:checked").length;
+			
+			//get total number of itemBox
+			var totalBoxCount = $(".itemBox").length;
+	     
+	   //get boolean result by comparing above two checkbox number
+			$("#summaryBox").prop("checked", checkedBoxCount == totalBoxCount);
 }
 
 
