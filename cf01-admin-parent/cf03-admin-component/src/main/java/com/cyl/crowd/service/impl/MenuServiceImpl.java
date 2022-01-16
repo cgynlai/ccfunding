@@ -23,4 +23,10 @@ public List<Menu> getAll() {
 	
 }
 
+@Override
+public void saveMenu(Menu menu) {
+	
+	menuMapper.insert(menu);
+}
+
 }

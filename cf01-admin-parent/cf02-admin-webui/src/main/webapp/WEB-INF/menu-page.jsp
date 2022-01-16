@@ -40,8 +40,67 @@
 			}
 		}) */
         
-		//call function to construct directory 	
+		// 1. call function to construct directory 	
  		generateTree();
+		
+		$("#treeDemo").on("click", ".addBtn", function(){
+			
+			// 将当前节点的id作为新创建节点的父节点
+			window.pid = this.id;
+			
+			$("#menuAddModal").modal("show");
+			
+			return false;
+		})
+		
+		
+		// 给添加子节点的模态框中save按钮绑定单击响应函数
+		$("#menuSaveBtn").click(function(){
+
+			// 收集表单项中用户输入的数据
+			var name = $.trim($("#menuAddModal [name=name]").val());
+			var url = $.trim($("#menuAddModal [name=url]").val());
+			// 单选按钮要定位到“被选中”的哪一个
+			var icon = $("#menuAddModal [name=icon]:checked").val();
+			
+			// 发送ajax请求
+			$.ajax({
+				"url": "menu/save.json",
+				"type": "post",
+				"data": {
+					"pid": window.pid,
+					"name": name,
+					"url": url,
+					"icon": icon
+				},
+				"dataType": "json",
+				"success": function(response){
+					var result = response.result;
+					if(result == "SUCCESS"){
+						layer.msg("success!")
+						
+						//load directory tree again, NOTE: must wait til server has completed save process
+						//otherwise it maynot display new data due to asyn issue
+						generateTree();
+					}
+					
+					if(result == "FAILED"){
+						layer.msg("failed!" + response.message);
+					}
+				},
+                "error": function(response){
+					layer.msg(response.status + " " + response.statusText);
+				}
+			});
+			
+			$("#menuAddModal").modal("hide");
+			
+			
+			
+			//reset form, jquery selector call click function to toggle 'reset' type btn
+			$("#menuResetBtn").click();
+		});
+		
 		
 /*		$("#treeDemo").on("click", ".addIcon", function(){
 			// 将当前节点的id作为新创建节点的父节点
@@ -216,9 +275,9 @@
 						</ul>
 					</div>
 				</div>
-			<%-- <%@include file="/WEB-INF/modal-menu-add.jsp" %>
+		    <%@include file="/WEB-INF/modal-menu-add.jsp" %>
 			<%@include file="/WEB-INF/modal-menu-confirm.jsp" %>
-			<%@include file="/WEB-INF/modal-menu-edit.jsp" %> --%>
+			<%@include file="/WEB-INF/modal-menu-edit.jsp" %>
 			</div>
 		</div>
 	</div>

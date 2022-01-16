@@ -21,6 +21,17 @@ public class MenuHandler {
   private MenuService menuService;
   
   @ResponseBody
+  @RequestMapping("/menu/save.json")
+  public ResultEntity<String> saveMenu(Menu menu) throws InterruptedException{
+	  
+	  Thread.sleep(2000);
+	  menuService.saveMenu(menu);
+	  return ResultEntity.successWithoutData();
+  }
+  
+  
+  
+  @ResponseBody
   @RequestMapping("/menu/get/whole/tree.json")
   public ResultEntity<Menu> getWholeTree() {
 	  
