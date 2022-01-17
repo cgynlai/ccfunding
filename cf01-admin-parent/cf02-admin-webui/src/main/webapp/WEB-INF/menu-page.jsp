@@ -54,7 +54,7 @@
 		})
 		
 		
-		// 给添加子节点的模态框中save按钮绑定单击响应函数
+		// 给添加子节点的模态框(#menuAddModal)中save按钮绑定单击响应函数
 		$("#menuSaveBtn").click(function(){
 
 			// 收集表单项中用户输入的数据
@@ -99,6 +99,36 @@
 			
 			//reset form, jquery selector call click function to toggle 'reset' type btn
 			$("#menuResetBtn").click();
+		});
+		
+		
+		//for edit
+		$("#treeDemo").on("click", ".editBtn", function(){
+			// assign current node id to global var
+			window.id = this.id;
+			//open modal
+			$("#menuEditModal").modal("show");
+			
+			//get zTreeObj object
+			 var zTreeObj =$.fn.zTree.getZTreeObj("treeDemo");
+			
+			
+			//attribute name we use to locate node
+			var key = "id";
+			//attribute value we use to locate node
+			var value = window.id;
+			
+			//get Node object based on id attribute
+			var currentNode = zTreeObj.getNodeByParam(key, value);
+			
+			//display data on form input field
+			$("#menuEditModal [name=name]").val(currentNode.name);
+			$("#menuEditModal [name=url]").val(currentNode.url);
+			
+			//select radio based on currentNode.icon value in array
+			$("#menuEditModal [name=icon]").val([currentNode.icon]); 
+			
+			return false;
 		});
 		
 		
