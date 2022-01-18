@@ -132,6 +132,103 @@
 		});
 		
 		
+		//binding click event to update btn in above edit modal
+		$("#menuEditBtn").click(function(){
+			
+			//collect form field input data 
+			var name = $("#menuEditModal [name=name]").val();
+			var url = $("#menuEditModal [name=url]").val();
+			var icon = $("#menuEditModal [name=icon]:checked").val();
+			
+			// 发送ajax请求
+			$.ajax({
+				"url": "menu/update.json",
+				"type": "post",
+				"data": {
+					"id": window.pid,
+					"name": name,
+					"url": url,
+					"icon": icon
+				},
+				"dataType": "json",
+				"success": function(response){
+					var result = response.result;
+					if(result == "SUCCESS"){
+						layer.msg("success!")
+						
+						//load directory tree again, NOTE: must wait til server has completed save process
+						//otherwise it maynot display new data due to asyn issue
+						generateTree();
+					}
+					
+					if(result == "FAILED"){
+						layer.msg("failed!" + response.message);
+					}
+				},
+                "error": function(response){
+					layer.msg(response.status + " " + response.statusText);
+				}
+			});
+			
+             $("#menuAddModal").modal("hide");
+			
+		    })
+		    
+		    //for 'x' remove btn
+		$("#treeDemo").on("click", ".removeBtn", function() {
+			// assign current node id to global var
+			window.id = this.id;
+			//open modal
+			$("#menuConfirmModal").modal("show");
+			
+			//get zTreeObj object
+			 var zTreeObj =$.fn.zTree.getZTreeObj("treeDemo");
+			
+			
+			//attribute name we use to locate node
+			var key = "id";
+			//attribute value we use to locate node
+			var value = window.id;
+			
+			//get Node object based on id attribute
+			var currentNode = zTreeObj.getNodeByParam(key, value);
+			
+			$("#removeNodeSpan").html("<i class='" + currentNode.icon+"'></i>"+currentNode.name);
+			
+			return false;
+		});
+		    
+		//binding ok btn in modal
+		$("#confirmBtn").click(function(){
+			$.ajax({
+				"url":"menu/remove.json",
+				"type":"post",
+				"data":{
+					"id": window.id
+				},
+				"dataType": "json",
+				"success": function(response){
+					var result = response.result;
+					if(result == "SUCCESS"){
+						layer.msg("success!")
+						
+						//load directory tree again, NOTE: must wait til server has completed save process
+						//otherwise it maynot display new data due to asyn issue
+						generateTree();
+					}
+					
+					if(result == "FAILED"){
+						layer.msg("failed!" + response.message);
+					}
+				},
+                "error": function(response){
+					layer.msg(response.status + " " + response.statusText);
+				}
+			});
+			
+			 $("#menuConfirmModal").modal("hide");
+		})
+		
 /*		$("#treeDemo").on("click", ".addIcon", function(){
 			// 将当前节点的id作为新创建节点的父节点
 			window.pid = $(this).attr("menuId");

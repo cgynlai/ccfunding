@@ -29,4 +29,17 @@ public void saveMenu(Menu menu) {
 	menuMapper.insert(menu);
 }
 
+@Override
+public void updateMenu(Menu menu) {
+	
+	//pid not passing in, so use selective to ensure "pid" will not change to null
+	menuMapper.updateByPrimaryKeySelective(menu);
+}
+
+@Override
+public void removeMenu(Integer id) {
+	menuMapper.deleteByPrimaryKey(id);
+	
+}
+
 }
