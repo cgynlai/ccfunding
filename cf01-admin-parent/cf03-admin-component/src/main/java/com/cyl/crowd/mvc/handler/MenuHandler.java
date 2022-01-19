@@ -6,22 +6,24 @@ import java.util.Map;
 import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+//import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+//import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.cyl.crowd.entity.Menu;
 import com.cyl.crowd.service.api.MenuService;
 import com.cyl.crowd.util.ResultEntity;
 
-@Controller
+@RestController
+// @Controller + @ResponseBody = @RestController
 public class MenuHandler {
 	
   @Autowired	
   private MenuService menuService;
   
-  @ResponseBody
+  //@ResponseBody
   @RequestMapping("/menu/remove.json")
   public ResultEntity<String> removeMenu(@RequestParam("id") Integer id) {
 	  
@@ -31,7 +33,7 @@ public class MenuHandler {
   } 
   
   
-  @ResponseBody
+  //@ResponseBody
   @RequestMapping("/menu/update.json")
   public ResultEntity<String> updateMenu(Menu menu) {
 	  
@@ -40,7 +42,7 @@ public class MenuHandler {
 	  return ResultEntity.successWithoutData();
   }
   
-  @ResponseBody
+  //@ResponseBody
   @RequestMapping("/menu/save.json")
   public ResultEntity<String> saveMenu(Menu menu) throws InterruptedException{
 	  
@@ -51,7 +53,7 @@ public class MenuHandler {
   
   
   
-  @ResponseBody
+  //@ResponseBody
   @RequestMapping("/menu/get/whole/tree.json")
   public ResultEntity<Menu> getWholeTree() {
 	  
@@ -90,7 +92,7 @@ public class MenuHandler {
 	  
   }
   
-  @ResponseBody
+  //@ResponseBody
   @RequestMapping("/menu/get/whole/treeOld")
   public ResultEntity<Menu> getWholeTreeOld() {
 	  
