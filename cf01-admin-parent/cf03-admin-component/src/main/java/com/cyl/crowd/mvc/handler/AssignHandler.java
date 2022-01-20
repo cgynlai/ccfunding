@@ -27,14 +27,14 @@ public class AssignHandler {
 			ModelMap modelMap
 			) {
 		//1. query assigned role
-//		List<Role> assignedRoleList = roleService.getAssignedRole(adminId);
+		List<Role> assignedRoleList = roleService.getAssignedRole(adminId);
 		
 		//2. query unassigned role
-//		List<Role> unAssignedRoleList = roleService.getUnAssignedRole(adminId);
+		List<Role> unAssignedRoleList = roleService.getUnAssignedRole(adminId);
 		
 		//3. store in model(equiv. request.setAttribute("attrName", attrValue)
-//		modelMap.addAttribute("unAssignedRoleList", unAssignedRoleList);
-//		modelMap.addAttribute("assignedRoleList", assignedRoleList);
+		modelMap.addAttribute("unAssignedRoleList", unAssignedRoleList);
+		modelMap.addAttribute("assignedRoleList", assignedRoleList);
 		
 		return "assign-role";
 	}
