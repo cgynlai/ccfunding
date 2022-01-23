@@ -8,6 +8,8 @@
 	$(function() {
 		$(".glyphicon-chevron-right").click(function() {
 			// 获取选中的值
+			//eq(0) represent first select
+			//">" : select sub-element
 			$("select:eq(0)>option:selected").appendTo("select:eq(1)")
 		})
 
@@ -39,11 +41,10 @@
 				</ol>
 				<div class="panel panel-default">
 					<div class="panel-body">
-						<form role="form" class="form-inline"
-							action="assign/do/role/assign.html" method="post">
-							<input type="hidden" name="adminId" value="${param.adminId }">
-							<input type="hidden" name="pageNum" value="${param.pageNum }">
-							<input type="hidden" name="keyword" value="${param.keyword }">
+						<form role="form" class="form-inline" action="assign/do/role/assign.html" method="post">
+							<input type="hidden" name="adminId" value="${param.adminId }" />
+							<input type="hidden" name="pageNum" value="${param.pageNum }" />
+							<input type="hidden" name="keyword" value="${param.keyword }" />
 							<div class="form-group">
 								<label for="exampleInputPassword1">未分配角色列表</label><br> <select
 									class="form-control" multiple="" size="10"
@@ -63,8 +64,9 @@
 								</ul>
 							</div>
 							<div class="form-group" style="margin-left: 40px;">
-								<label for="exampleInputPassword1">已分配角色列表</label><br> <select
-									name="roleIdList" class="form-control" multiple="" size="10"
+								<label for="exampleInputPassword1">已分配角色列表</label><br> 
+								<select
+									name="roleIdList" class="form-control" multiple="multiple" size="10"
 									style="width: 100px; overflow-y: auto;">
 									<c:forEach items="${requestScope.assignedRoleList }" var="role">
 										<option value="${role.id }">${role.name }</option>

@@ -21,6 +21,19 @@ public class AssignHandler {
 	@Autowired
 	private RoleService roleService;
 	
+	
+	@RequestMapping("/assign/do/role/assign.html")
+	public String saveAdminRoleRelationship(
+			@RequestParam("adminId") Integer adminId,
+			@RequestParam("pageNum") Integer pageNum,
+			@RequestParam("keyword") String keyword,
+			//allow not to provide role list from browser
+			@RequestParam(value="roleIdList", required=false) List<Integer> roleIdList
+			) {
+		adminService.saveAdminRoleRelationship(adminId, roleIdList);
+		return "redirect:/admin/get/page.html?pageNum=" + pageNum + "&keyword=" + keyword;
+	}
+	
 	@RequestMapping("/assign/to/assign/role/page.html")
 	public String toAssignRolePage(
 			@RequestParam("adminId") Integer adminId,
@@ -37,6 +50,7 @@ public class AssignHandler {
 		modelMap.addAttribute("assignedRoleList", assignedRoleList);
 		
 		return "assign-role";
+		//return "target";
 	}
 	
 }
