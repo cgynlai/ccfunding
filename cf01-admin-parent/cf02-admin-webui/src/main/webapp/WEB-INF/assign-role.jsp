@@ -23,7 +23,7 @@
 			// 在提交表单前把“已分配”部分的option 全部选中
 			$("select:eq(1)>option").prop("selected", "selected");
 			// 为了看到上面代码的效果，暂时不让表单提交
-			// return false;
+			 //return false;
 		});
 	})
 </script>
