@@ -50,7 +50,7 @@ PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
 		<table tableName="t_address" domainObjectName="AddressPO" />
 		
 	-->
-	    <table tableName="t_menu" domainObjectName="Menu" />
+	    <table tableName="t_auth" domainObjectName="Auth" />
 	    
 	</context>
 </generatorConfiguration>

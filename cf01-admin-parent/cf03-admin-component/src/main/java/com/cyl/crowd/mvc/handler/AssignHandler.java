@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.cyl.crowd.entity.Role;
 import com.cyl.crowd.service.api.AdminService;
+import com.cyl.crowd.service.api.AuthService;
 import com.cyl.crowd.service.api.RoleService;
 
 @Controller
@@ -20,6 +21,9 @@ public class AssignHandler {
 	
 	@Autowired
 	private RoleService roleService;
+	
+	@Autowired
+	private AuthService authService;
 	
 	
 	@RequestMapping("/assign/do/role/assign.html")
