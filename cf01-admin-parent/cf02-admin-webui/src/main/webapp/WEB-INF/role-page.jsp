@@ -3,9 +3,8 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <%@include file="/WEB-INF/include-head.jsp"%>
-<!-- <link rel="stylesheet" href="ztree/zTreeStyle.css" />
+<link rel="stylesheet" href="ztree/zTreeStyle.css" />
 <script type="text/javascript" src="ztree/jquery.ztree.all-3.5.min.js"></script>
- -->
 <link rel="stylesheet" href="css/pagination.css" />
 <script type="text/javascript" src="jquery/jquery.pagination.js"></script>
 <script type="text/javascript" src="crowd/my-role.js"></script>
@@ -257,20 +256,25 @@
 		})
 
 		
-/*		
-		// 分配权限
+		
+		// 分配权限button binding to function
 		$("#rolePageBody").on("click", ".checkBtn", function() {
+			
+			//assign current role id assign to global var
+			
+			window.roleId = this.id;
+			alert("window.roleId " + this.id);
 			// 打开模态框
 			$("#assignModal").modal("show");
 			
 			// 获取角色id
-			window.roleId = $(this).attr("roleid");
+			//window.roleId = $(this).attr("roleid");
 
 			// 生成权限树形图
 			fillAuthTree();
 
 		});
-
+/*
 		$("#assignAuthBtn").click(function() {
 			// ①收集树形结构的各个节点中被勾选的节点
 			// [1]声明一个专门的数组存放id
@@ -385,10 +389,11 @@
 			<%@include file="/WEB-INF/modal-role-add.jsp"%>
 			<%@include file="/WEB-INF/modal-role-edit.jsp"%>
 			<%@include file="/WEB-INF/modal-role-confirm.jsp"%>
+			<%@include file="/WEB-INF/modal-role-assign-auth.jsp"%>
 		<%-- 	
 			
 			<%@include file="/WEB-INF/modal-role-delete.jsp"%>
-			<%@include file="/WEB-INF/modal-role-assign-auth.jsp"%> --%>
+			 --%>
 		</div>
 	</div>
 

@@ -1,3 +1,74 @@
+//to show Auth tree directory in modal 
+function fillAuthTree() {
+	// send Ajax request
+	var ajaxReturn = $.ajax({
+		"url": "assign/get/all/auth.json",
+		"type": "post",
+		"dataType": "json",
+        "async": false
+	});
+	
+	if(ajaxReturn.status != 200){
+		layer.msg("ajax request failed! response status: " + ajaxReturn.status + "error text: " +
+		ajaxReturn.statusText);
+		return;
+	}
+	//2. list gotten from server response in Json format and will not construct in tree structure.
+	// let zTree to do it
+				var authList = ajaxReturn.responseJSON.data;
+				
+				//3.prepare zTree setting for Json obj
+				var setting = {
+					data: {
+						simpleData: {
+							//enable simple json function
+							enable: true,
+							//use "categoryId" to relate to parent node instead of pId
+							pIdKey: "categoryId"
+						},
+						key: {
+							//use 'title' property to display node name instead of 'name' 
+							name: "title"
+						}
+					},
+					//display checkbox
+					check: {
+						enable: true
+					}
+				}
+				
+				//4.construct tree directory
+				//<ul id="authTreeDemo" class="ztree">
+				$.fn.zTree.init($("#authTreeDemo"), setting, authList)
+				
+				//obtain zTreeObj object
+				var zTreeObj = $.fn.zTree.getZTreeObj("authTreeDemo");
+				//call function to expand node
+				zTreeObj.expandAll(true);
+				
+				alert("window.roleId b4 ajax " + window.roleId);
+	           //5.query assigned Auth which will be in id list
+	           ajaxReturn = $.ajax({
+		         "url": "assign/get/assigned/auth/id/by/role/id.json",
+		         "type": "post",
+		         "data": {
+			         "roleId": window.roleId
+		          },
+		          "dataType": "json",
+		          "async": false
+	            });
+	            
+	            if(ajaxReturn.status != 200){
+		            layer.msg("ajax request failed! response status 123: " + ajaxReturn.status + "error text: " +
+		            ajaxReturn.statusText);
+		            return;
+	                }
+	                
+	         var authIdArray = ajaxReturn.responseJSON.data;
+	         alert(authIdArray);
+	           //6.'ticked' checkbox according to authIdArray list
+}
+
 //
 function showConfirmModal(roleArray) {
 	
@@ -136,9 +207,7 @@ function fillTableBody(pageInfo) {
 		   // var checkboxTd = "<td><input type='checkbox' id='"+roleId+"' class='itemBox'/></td>";
 		    var roleNameTd = "<td>" + roleName + "</td>"; 
 		    
-		    var checkBtn = "<button type='button' roleId='"
-				+ roleId
-				+ "' class='btn btn-success btn-xs checkBtn'><i class='glyphicon glyphicon-check'></i></button>";
+		    var checkBtn = "<button type='button' id='" + roleId + "' class='btn btn-success btn-xs checkBtn'><i class='glyphicon glyphicon-check'></i></button>";
 		    // 铅笔按钮用于修改role信息。用id属性（也可以是其他属性）携带当前的角色的id，class添加一个pencilBtn，方便添加响应函数
 		    /*var pencilBtn = "<button type='button' roleId='"
 				+ roleId

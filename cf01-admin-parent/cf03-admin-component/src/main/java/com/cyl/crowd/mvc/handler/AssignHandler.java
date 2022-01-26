@@ -7,11 +7,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.cyl.crowd.entity.Auth;
 import com.cyl.crowd.entity.Role;
 import com.cyl.crowd.service.api.AdminService;
 import com.cyl.crowd.service.api.AuthService;
 import com.cyl.crowd.service.api.RoleService;
+import com.cyl.crowd.util.ResultEntity;
 
 @Controller
 public class AssignHandler {
@@ -24,6 +27,23 @@ public class AssignHandler {
 	
 	@Autowired
 	private AuthService authService;
+	
+	@ResponseBody
+	@RequestMapping("/assign/get/assigned/auth/id/by/role/id.json")
+	public ResultEntity<List<Integer>> getAssignedAuthIdByRoleId(
+			@RequestParam("roleId") Integer roleId){
+		 List<Integer> authIdList = authService.getAssignedAuthIdByRoleId(roleId);
+		 return ResultEntity.successWithData(authIdList);
+	}
+	
+	
+	@ResponseBody
+	@RequestMapping("/assign/get/all/auth.json")
+	public ResultEntity<List<Auth>> getAllAuth() {
+		
+		List<Auth> authList = authService.getAll();
+		return ResultEntity.successWithData(authList);
+	}
 	
 	
 	@RequestMapping("/assign/do/role/assign.html")
