@@ -46,7 +46,7 @@ function fillAuthTree() {
 				//call function to expand node
 				zTreeObj.expandAll(true);
 				
-				alert("window.roleId b4 ajax " + window.roleId);
+				//alert("window.roleId b4 ajax " + window.roleId);
 	           //5.query assigned Auth which will be in id list
 	           ajaxReturn = $.ajax({
 		         "url": "assign/get/assigned/auth/id/by/role/id.json",
@@ -65,8 +65,21 @@ function fillAuthTree() {
 	                }
 	                
 	         var authIdArray = ajaxReturn.responseJSON.data;
-	         alert(authIdArray);
+	        // alert(authIdArray);
 	           //6.'ticked' checkbox according to authIdArray list
+	           //iterate authIdArray
+	           for(var i=0; i<authIdArray.length; i++) {
+		            var authId = authIdArray[i];
+		            
+		            //identify node based on id
+		            var treeNode = zTreeObj.getNodeByParam("id", authId);
+		            
+		            //tick treeNode
+		            var checked = true;
+		            //not linked to main checkbox
+		            var checkTypeFlag = false;
+		            zTreeObj.checkNode(treeNode, checked,checkTypeFlag );
+	           }
 }
 
 //

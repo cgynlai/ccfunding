@@ -263,7 +263,7 @@
 			//assign current role id assign to global var
 			
 			window.roleId = this.id;
-			alert("window.roleId " + this.id);
+			//alert("window.roleId " + this.id);
 			// 打开模态框
 			$("#assignModal").modal("show");
 			
