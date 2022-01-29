@@ -274,7 +274,7 @@
 			fillAuthTree();
 
 		});
-/*
+
 		$("#assignAuthBtn").click(function() {
 			// ①收集树形结构的各个节点中被勾选的节点
 			// [1]声明一个专门的数组存放id
@@ -289,6 +289,8 @@
 				var authId = checkedNode.id;
 				authIdArray.push(authId);
 			}
+			
+			//alert(authIdArray);
 			// ②发送请求执行分配
 			var requestBody = {
 				"authIdArray" : authIdArray,
@@ -317,7 +319,7 @@
 			});
 			$("#assignModal").modal("hide");
 		});
- */
+
 	})
 </script>
 <body>

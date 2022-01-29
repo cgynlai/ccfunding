@@ -1,10 +1,12 @@
 package com.cyl.crowd.mvc.handler;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -27,6 +29,16 @@ public class AssignHandler {
 	
 	@Autowired
 	private AuthService authService;
+	
+	
+	
+	@ResponseBody
+	@RequestMapping("/assign/do/role/assign/auth.json")
+	public ResultEntity<String> saveRoleAuthRelationship(@RequestBody Map<String, List<Integer>> map) {
+		
+		authService.saveRoleAuthRelationship(map);
+		return ResultEntity.successWithoutData();
+	}
 	
 	@ResponseBody
 	@RequestMapping("/assign/get/assigned/auth/id/by/role/id.json")
