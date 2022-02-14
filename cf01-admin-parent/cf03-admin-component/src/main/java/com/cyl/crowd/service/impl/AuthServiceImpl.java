@@ -43,7 +43,7 @@ public class AuthServiceImpl implements AuthService {
 		List<Integer> authIdList = map.get("authIdArray");
 		
 		// 4. judge if authIdList from browser is valid
-		if(authIdList !=null || authIdList.size()>0 ) {
+		if(authIdList !=null && authIdList.size()>0 ) {
 			authMapper.insertNewRelationship(roleId, authIdList);
 		}
 		
