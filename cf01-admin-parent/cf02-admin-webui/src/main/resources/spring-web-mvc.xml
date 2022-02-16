@@ -27,20 +27,22 @@
 			</props>
 		</property>
 	</bean>
-	<!--	注册拦截器 -->
+	
+	<!-- 	注册拦截器.   p238 start using SpringSecurity so self-defined interceptor no longer needed
 	 <mvc:interceptors>
 	 	<mvc:interceptor>
-	 <!--  	配置拦截的资源 -->
+	  	配置拦截的资源
 	 		<mvc:mapping path="/**"/>
 	 		<mvc:exclude-mapping path="/admin/to/login/page.html"/>
 	 		<mvc:exclude-mapping path="/admin/do/login.html"/>
 	 		
-	 		<!-- <mvc:exclude-mapping path="/admin/to/logout.html"/> -->
+	 	    <mvc:exclude-mapping path="/admin/to/logout.html"/>
 	 	
-	 <!--		配置拦截器类  -->
+	 		配置拦截器类 
 	 		<bean class="com.cyl.crowd.mvc.interceptor.LoginInterceptor"></bean>
 	 	</mvc:interceptor>
 	 </mvc:interceptors> 
+	 -->
 	
 	<!-- 视图路径映射 -->
 	<!-- <mvc:view-controller path="/admin/to/login/page.html" view-name="admin-login"/> -->

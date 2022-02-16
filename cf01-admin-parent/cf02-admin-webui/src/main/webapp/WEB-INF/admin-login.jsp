@@ -30,17 +30,19 @@
 
 	<div class="container">
 
-		<!-- <form class="form-signin" method="post"
-			action="security/do/login.html" role="form"> -->
+            <!-- original code b4 spirng security impl -->
+           <!--  <form class="form-signin" method="post"
+			action="admin/do/login.html" role="form"> -->
 			
 			<form class="form-signin" method="post"
-			action="admin/do/login.html" role="form">
+			action="security/do/login.html" role="form">
+		
 			<h2 class="form-signin-heading">
 				<i class="glyphicon glyphicon-log-in"></i> 管理员登录
 			</h2>
-			<p>${requestScope.exception.message }</p>
+			<p>${requestScope.exception.message }</p>		
+			<p>${SPRING_SECURITY_LAST_EXCEPTION.message}</p>
 			
-			<%-- <p>${SPRING_SECURITY_LAST_EXCEPTION.message}</p> --%>
 			<%-- <div class="form-group has-success has-feedback">
 				<input type="hidden" name="${_csrf.parameterName}"
 					value="${_csrf.token}" /> <input type="text" name="loginAcct"
@@ -60,6 +62,7 @@
 					id="inputSuccess4" placeholder="请输入登录密码" style="margin-top: 10px;">
 				<span class="glyphicon glyphicon-lock form-control-feedback"></span>
 			</div>
+			
 			<button class="btn btn-lg btn-success btn-block" type="submit">登录</button>
 		</form>
 	</div>
