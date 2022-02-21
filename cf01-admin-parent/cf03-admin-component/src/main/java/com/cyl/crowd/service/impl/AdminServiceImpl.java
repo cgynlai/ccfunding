@@ -27,8 +27,8 @@ import com.github.pagehelper.PageInfo;
 
 
 @Service
-public class AdminServiceImpl implements AdminService {
-	
+
+public class AdminServiceImpl implements AdminService {	
 	@Autowired
 	private AdminMapper adminMapper;
 	
