@@ -1,12 +1,14 @@
 package com.cyl.crowd.mvc.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
@@ -15,13 +17,24 @@ public class WebAppSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private UserDetailsService userDetailsService;
 	
+	//put into container
+	/* can't autowire in xxxxService due to different container, drop this idea in p247
+	 * @Bean public BCryptPasswordEncoder getPasswordEncoder() { return new
+	 * BCryptPasswordEncoder(); }
+	 */
+	
+	@Autowired
+	private BCryptPasswordEncoder passwordEncoder;
+	
    @Override
 	protected void configure(AuthenticationManagerBuilder builder) throws Exception {
 	   //  开启在内存中进行身份验证（开发时暂用）
 	   //	builder.inMemoryAuthentication().withUser("Tom").password("123123").roles("ADMIN");
 	   
 	//正式 使用userDetailsService，即配置的数据库验证登录
-	   builder.userDetailsService(userDetailsService);
+	   builder
+	   .userDetailsService(userDetailsService)
+	   .passwordEncoder(passwordEncoder);
 	}	
 
    @Override

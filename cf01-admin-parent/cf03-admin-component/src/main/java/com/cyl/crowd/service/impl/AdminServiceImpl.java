@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.cyl.crowd.constant.CrowdConstant;
@@ -32,6 +33,9 @@ public class AdminServiceImpl implements AdminService {
 	@Autowired
 	private AdminMapper adminMapper;
 	
+	@Autowired
+	private BCryptPasswordEncoder passwordEncoder;
+	
 	
 	private Logger logger = LoggerFactory.getLogger(AdminServiceImpl.class);
 
@@ -40,7 +44,9 @@ public class AdminServiceImpl implements AdminService {
 
 		// 加密密码
 		String userPswd = admin.getUserPswd();
-		userPswd = CrowdUtil.md5(userPswd);   
+		//not using this after spring security implementation p247
+		// userPswd = CrowdUtil.md5(userPswd);   
+		userPswd = passwordEncoder.encode(userPswd);
 		admin.setUserPswd(userPswd);
 		
 		// 生成系统时间
