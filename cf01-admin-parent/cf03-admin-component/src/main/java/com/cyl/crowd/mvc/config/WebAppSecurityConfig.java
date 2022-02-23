@@ -62,6 +62,8 @@ public class WebAppSecurityConfig extends WebSecurityConfigurerAdapter {
 			   .permitAll()
 			   .antMatchers("/ztree/**")
 			   .permitAll()
+		       .antMatchers("/admin/get/page.html")
+			   .hasRole("manager")
 	           .anyRequest()       //any other requests must 
 	           .authenticated()    //be authenticated
 	           .and()
