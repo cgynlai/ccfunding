@@ -83,12 +83,13 @@ public class CrowdExceptionResolver {
 		  String viewName = "system-error";
 		  return commonResolveException(exception, request, response, viewName); }
 	 
-	  @ExceptionHandler(value = { Exception.class }) 
-	  public ModelAndView resolveException(Exception exception,
-	  HttpServletRequest request, HttpServletResponse response) throws IOException { 
-           //			 String viewName = "admin-login"; 
-		  String viewName = "admin-login";
-		  return commonResolveException(exception, request, response, viewName); }
+		/*
+		 * @ExceptionHandler(value = { Exception.class }) public ModelAndView
+		 * resolveException(Exception exception, HttpServletRequest request,
+		 * HttpServletResponse response) throws IOException { // String viewName =
+		 * "admin-login"; String viewName = "admin-login"; return
+		 * commonResolveException(exception, request, response, viewName); }
+		 */
 	/**
 	 * 解析登录失败异常
 	 * @param exception
@@ -104,12 +105,13 @@ public class CrowdExceptionResolver {
 		return commonResolveException(exception, request, response, viewName);
 	}
 	
-	@ExceptionHandler(value = { AccessDeniedException.class })
-	public ModelAndView resolveAccessDeniedException(Exception exception, HttpServletRequest request,
-			HttpServletResponse response) throws IOException {
-		String viewName = "system-error";
-		return commonResolveException(exception, request, response, viewName);
-	}
+	
+	  @ExceptionHandler(value = { AccessDeniedException.class }) public
+	  ModelAndView resolveAccessDeniedException(Exception exception,
+	  HttpServletRequest request, HttpServletResponse response) throws IOException
+	  { String viewName = "system-error"; return commonResolveException(exception,
+	  request, response, viewName); }
+	 
 
 	@ExceptionHandler(value = { ArithmeticException.class })
 	public ModelAndView resolveMathException(Exception exception, HttpServletRequest request,

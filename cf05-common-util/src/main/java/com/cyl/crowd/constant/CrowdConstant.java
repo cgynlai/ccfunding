@@ -39,6 +39,8 @@ public class CrowdConstant {
 
 	public static final String ATTR_NAME_PORTAL_DATA = "portal_data";
 
+	public static final String MESSAGE_ACCESS_DENIED = "Sorry, you can't access this rsource";
+
 
 
 

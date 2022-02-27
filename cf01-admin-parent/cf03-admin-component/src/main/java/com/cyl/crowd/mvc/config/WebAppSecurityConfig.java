@@ -1,8 +1,14 @@
 package com.cyl.crowd.mvc.config;
 
+import java.io.IOException;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -10,6 +16,9 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.access.AccessDeniedHandler;
+
+import com.cyl.crowd.constant.CrowdConstant;
 
 @Configuration
 @EnableWebSecurity
@@ -67,9 +76,21 @@ public class WebAppSecurityConfig extends WebSecurityConfigurerAdapter {
 			   .antMatchers("/ztree/**")
 			   .permitAll()
 		       .antMatchers("/admin/get/page.html")
-			   .hasRole("manager")
+			  // .hasRole("manager")
+		       .access("hasRole('manager') OR hasAuthority('user:get')")
 	           .anyRequest()       //any other requests must 
 	           .authenticated()    //be authenticated
+	           .and()
+	           .exceptionHandling()
+	           .accessDeniedHandler(new AccessDeniedHandler() {
+
+				@Override
+				public void handle(HttpServletRequest request, HttpServletResponse response,
+						AccessDeniedException accessDeniedException) throws IOException, ServletException {
+					request.setAttribute("exception", new Exception(CrowdConstant.MESSAGE_ACCESS_DENIED));
+					request.getRequestDispatcher("/WEB-INF/system-error.jsp").forward(request, response);
+					
+				}})
 	           .and()
 	           .csrf()           
 	           .disable()

@@ -3,11 +3,13 @@ package com.cyl.crowd.mvc.handler;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cyl.crowd.constant.CrowdConstant;
 import com.cyl.crowd.entity.Admin;
@@ -39,6 +41,7 @@ public class AdminHandler {
 		return "admin-edit";
 	}
 	
+	@PreAuthorize("hasAuthority('user:save')")
 	@RequestMapping("/admin/save.html")
 	public String save(Admin admin) {
 		adminService.saveAdmin(admin);
@@ -98,6 +101,8 @@ public class AdminHandler {
 		       modelMap.addAttribute(CrowdConstant.ATTR_NAME_PAGE_INFO, pageInfo);
 		    return "admin-page";
 	}
+	
+
 	
 
 	
